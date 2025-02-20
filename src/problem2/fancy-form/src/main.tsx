@@ -4,13 +4,17 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import CssBaseline from '@mui/material/CssBaseline';
+import { queryClient } from '@shared/libs/react-query/query-client';
+import { QueryClientProvider as ReactQueryQueryClientProvider } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CssBaseline />
-    <div>Fancy Form</div>
-    <Currency />
+    <ReactQueryQueryClientProvider client={queryClient}>
+      <div>Fancy Form</div>
+      <Currency />
+    </ReactQueryQueryClientProvider>
   </StrictMode>
 );
