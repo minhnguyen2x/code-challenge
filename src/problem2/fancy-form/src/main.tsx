@@ -9,6 +9,10 @@ import { QueryClientProvider as ReactQueryQueryClientProvider } from '@tanstack/
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import('./_mocks/browser').then(({ worker }) => {
+  worker.start();
+});
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CssBaseline />
