@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const priceHandler = http.get(
-  `http://localhost:6000/prices`,
+  `http://localhost:8051/currency/prices`,
   () => {
     return HttpResponse.json({
       success: true,
