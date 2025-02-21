@@ -9,15 +9,23 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { CurrencyExchangePage } from '@pages/currency-exchange/page';
 
-import('./_mocks/browser').then(({ worker }) => {
-  worker.start();
-});
+const renderApp = () => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <CssBaseline />
+      <ReactQueryQueryClientProvider client={queryClient}>
+        <CurrencyExchangePage />
+      </ReactQueryQueryClientProvider>
+    </StrictMode>
+  );
+};
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <CssBaseline />
-    <ReactQueryQueryClientProvider client={queryClient}>
-      <CurrencyExchangePage />
-    </ReactQueryQueryClientProvider>
-  </StrictMode>
-);
+if (import.meta.env.DEV) {
+  import('./_mocks/browser').then(({ worker }) => {
+    worker.start().then(() => {
+      renderApp();
+    });
+  });
+} else {
+  renderApp();
+}
